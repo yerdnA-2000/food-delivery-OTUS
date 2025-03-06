@@ -9,7 +9,6 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-/composer.lock
 /.phpunit.result.cache
 /.idea
 
