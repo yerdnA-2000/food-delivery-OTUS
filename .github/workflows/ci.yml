@@ -51,7 +51,6 @@ jobs:
         run: |
           export DATABASE_URL="postgresql://symfony:symfony@localhost:5432/food_delivery?serverVersion=15&charset=utf8"
           php bin/console doctrine:database:create --if-not-exists --env=test
-          php bin/console doctrine:migrations:migrate --no-interaction --env=test
 
       - name: Check migrations status
         run: |
