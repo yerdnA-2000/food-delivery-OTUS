@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'main')]
-    public function mainAction(): JsonResponse
+    public function index(): JsonResponse
     {
         return new JsonResponse([], 200);
     }

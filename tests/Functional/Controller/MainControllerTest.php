@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class MainControllerTest extends WebTestCase
 {
-    public function testMain(): void
+    public function testIndex(): void
     {
         $client = self::createClient();
         $client->request('GET', '/');
 
-        $this->assertResponseIsSuccessful();
+        self::assertResponseIsSuccessful();
     }
 }
