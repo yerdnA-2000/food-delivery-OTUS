@@ -1,0 +1,15 @@
+services:
+  _defaults:
+    public: true
+
+###> Data Fixtures
+
+  App\Tests\Functional\DataFixtures\LoadUsers:
+    arguments:
+      $passwordHasher: '@security.user_password_hasher'
+
+###< Data Fixtures
+
+  app.test.require_auth.middleware:
+    parent: App\Middleware\RequireAuthMiddleware
+    public: true

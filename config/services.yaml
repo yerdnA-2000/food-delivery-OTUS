@@ -20,3 +20,7 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    App\Middleware\RequireAuthMiddleware:
+        arguments:
+            $security: '@security.helper'
+            $router: '@router'
