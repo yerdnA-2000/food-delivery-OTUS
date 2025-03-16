@@ -76,10 +76,10 @@ jobs:
 
       - name: Check coverage directory
         run: |
-          ls -la var/coverage
+          ls -la coverage
 
       - name: Upload coverage artifacts
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: var/coverage/
+          path: coverage/
