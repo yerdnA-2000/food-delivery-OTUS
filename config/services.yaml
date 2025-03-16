@@ -22,5 +22,18 @@ services:
 
     App\Middleware\RequireAuthMiddleware:
         arguments:
+            $kernel: '@http_kernel'
             $security: '@security.helper'
             $router: '@router'
+        tags:
+            - { name: kernel.middleware, priority: 20 }
+
+    App\Middleware\SmartLinkMiddleware:
+        arguments:
+            $kernel: '@http_kernel'
+            $redirectService: '@app.service.redirect_service'
+        tags:
+            - { name: kernel.middleware, priority: 10 }
+
+    app.service.redirect_service:
+        class: App\Service\RedirectService
