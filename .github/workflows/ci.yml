@@ -35,8 +35,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: pdo_pgsql
+          extensions: pdo_pgsql, xdebug
           tools: composer:v2
+          coverage: xdebug
 
       - name: Install dependencies
         run: |
@@ -68,5 +69,5 @@ jobs:
           export DATABASE_URL="postgresql://symfony:symfony@localhost:5432/food_delivery?serverVersion=15&charset=utf8"
           php bin/console doctrine:migrations:migrate --no-interaction --env=test || true
 
-      - name: Run tests
-        run: ./vendor/bin/simple-phpunit
+      - name: Run tests with coverage
+        run: ./vendor/bin/simple-phpunit --coverage-clover var/coverage/clover.xml
