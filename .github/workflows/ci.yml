@@ -73,3 +73,9 @@ jobs:
         run: |
           mkdir -p var/coverage
           ./vendor/bin/simple-phpunit --coverage-clover var/coverage/clover.xml
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: var/coverage/
