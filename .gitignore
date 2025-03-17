@@ -27,4 +27,4 @@
 ###< symfony/phpunit-bridge ###
 
 /var/*
-!/var/coverage
+#!/var/coverage
