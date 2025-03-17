@@ -2,37 +2,27 @@
 
 namespace App\Service;
 
-use App\Entity\RedirectRule;
-use App\Handler\RuleContext;
-use App\Handler\RuleChainHandler;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 
 class RedirectService
 {
+    /**
+     * @param iterable<RedirectorInterface> $redirectors
+     */
     public function __construct(
-        protected ManagerRegistry  $doctrine,
-        protected RuleChainHandler $ruleChainHandler,
+        private iterable $redirectors,
     ) {
     }
 
     public function getRedirectUrl(Request $request): ?string
     {
-        if (!$restaurantSlug = $request->attributes->get('restaurantSlug')) {
-            return null;
-        }
+        foreach ($this->redirectors as $redirector) {
+            if ($redirector->supports($request)) {
+                $url = $redirector->getRedirectUrl($request);
 
-        $context = new RuleContext($request);
-
-        $redirectRules = $this->doctrine
-            ->getRepository(RedirectRule::class)
-            ->findByRestaurantSlug($restaurantSlug);
-
-        foreach ($redirectRules as $redirectRule) {
-            $url = $this->ruleChainHandler->process($redirectRule, $context);
-
-            if ($url) {
-                return $url;
+                if ($url) {
+                    return $url;
+                }
             }
         }
 
