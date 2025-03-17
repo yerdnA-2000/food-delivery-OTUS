@@ -45,6 +45,21 @@ services:
         tags:
             - { name: app.rule_handler }
 
+    app.location_rule_handler:
+        class: App\Handler\LocationRuleHandler
+        tags:
+            - { name: app.rule_handler }
+
+    app.device_rule_handler:
+        class: App\Handler\DeviceRuleHandler
+        tags:
+            - { name: app.rule_handler }
+
+    app.date_time_rule_handler:
+        class: App\Handler\DateTimeRuleHandler
+        tags:
+            - { name: app.rule_handler }
+
     app.redirect_service:
         class: App\Service\RedirectService
         arguments:
