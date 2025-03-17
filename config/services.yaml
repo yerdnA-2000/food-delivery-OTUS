@@ -63,5 +63,12 @@ services:
     app.redirect_service:
         class: App\Service\RedirectService
         arguments:
+            $redirectors: !tagged_iterator app.redirector
+
+    app.restaurant_redirector:
+        class: App\Service\RestaurantRedirector
+        arguments:
             $doctrine: '@doctrine'
             $ruleChainHandler: '@app.rule_chain_handler'
+        tags:
+            - { name: app.redirector }
