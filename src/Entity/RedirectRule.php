@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Repository\RedirectRuleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: RedirectRuleRepository::class)]
 #[ORM\Table(name: self::TABLE_NAME)]
 class RedirectRule
 {
