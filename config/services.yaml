@@ -31,9 +31,22 @@ services:
     App\Middleware\SmartLinkMiddleware:
         arguments:
             $kernel: '@http_kernel'
-            $redirectService: '@app.service.redirect_service'
+            $redirectService: '@app.redirect_service'
         tags:
             - { name: kernel.middleware, priority: 10 }
 
-    app.service.redirect_service:
+    app.rule_chain_handler:
+        class: App\Handler\RuleChainHandler
+        arguments:
+            $handlers: !tagged_iterator app.rule_handler
+
+    app.time_rule_handler:
+        class: App\Handler\TimeRuleHandler
+        tags:
+            - { name: app.rule_handler }
+
+    app.redirect_service:
         class: App\Service\RedirectService
+        arguments:
+            $doctrine: '@doctrine'
+            $ruleChainHandler: '@app.rule_chain_handler'
